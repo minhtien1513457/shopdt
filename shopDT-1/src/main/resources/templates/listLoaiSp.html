@@ -8,7 +8,7 @@
 	<div class="container" id="main-content">
 		<div class="row">
 			<div class="col-6 no-padding">
-				<form class="form-inline" action="#" th:action="@{/contact/search}" method="get">
+				<form class="form-inline" action="#" th:action="@{admin/loaiSp/search}" method="get">
 					<input class="form-control mr-sm-2" type="search" name="term" placeholder="Search by name ..." />
 					<button class="btn btn-primary" type="submit">
 						<i class="fa fa-search"></i> Search
@@ -17,7 +17,7 @@
 			</div>
 
 			<div class="col-6 no-padding">
-				<a href="#" th:href="@{/contact/add}" class="btn btn-success float-right">
+				<a href="#" th:href="@{admin/loaiSp/add}" class="btn btn-success float-right">
 					<i class="fa fa-plus-square"></i> New contact
 				</a>
 			</div>
@@ -31,34 +31,31 @@
 				</button>
 			</div>
 
-			<th:block th:if="${#lists.isEmpty(contacts)}">
+			<th:block th:if="${#lists.isEmpty(loaiSps)}">
 				<h5>No contacts</h5>
 			</th:block>
 
-			<th:block th:unless="${#lists.isEmpty(contacts)}">
+			<th:block th:unless="${#lists.isEmpty(loaiSps)}">
 				<div class="table-responsive">
 					<h5>List of contacts</h5>
 					<table class="table table-bordered table-hover">
 						<thead>
 						<tr>
 							<th>#</th>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Phone</th>
-							<th>Action</th>
+							<th>Tên</th>
+							<th>Số Lượng</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr th:each="contact,iterStat : ${contacts}">
+						<tr th:each="loaiSp,iterStat : ${loaiSps}">
 							<th scope="row" th:text="${iterStat.count}"></th>
-							<td th:text="${contact.name}"></td>
-							<td th:text="${contact.email}"></td>
-							<td th:text="${contact.phone}"></td>
+							<td th:text="${loaiSp.ten}"></td>
+							<td th:text="${loaiSp.soluong}"></td>
 							<td>
-								<a href="#" th:href="@{/contact/{id}/edit(id=${contact.id})}" class="mr-sm-2 text-primary">
+								<a href="#" th:href="@{/loaiSp/{id}/edit(id=${loaiSp.id})}" class="mr-sm-2 text-primary">
 									<i class="fa fa-pencil"></i>
 								</a>
-								<a href="#" th:href="@{/contact/{id}/delete(id=${contact.id})}" class="text-danger">
+								<a href="#" th:href="@{/loaiSp/{id}/delete(id=${loaiSp.id})}" class="text-danger">
 									<i class="fa fa-trash"></i>
 								</a>
 							</td>

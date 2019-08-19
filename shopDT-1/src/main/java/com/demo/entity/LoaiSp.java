@@ -12,7 +12,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "loaisp")
-public class LoaiSp {
+public class LoaiSp implements java.io.Serializable{
+	public static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable=false)
@@ -21,7 +23,26 @@ public class LoaiSp {
 	@Column(name = "ten")
 	private String ten;
 	
-	 @OneToMany(mappedBy="LoaiSp")
+	@Column(name = "soluong")
+	private String soluong;
+	
+	 public String getSoluong() {
+		return soluong;
+	}
+
+	public void setSoluong(String soluong) {
+		this.soluong = soluong;
+	}
+
+	public Set<ChitietSp> getChitietSps() {
+		return chitietSps;
+	}
+
+	public void setChitietSps(Set<ChitietSp> chitietSps) {
+		this.chitietSps = chitietSps;
+	}
+
+	@OneToMany(mappedBy="loaiSp")
 	    private Set<ChitietSp> chitietSps;
 
 	public Integer getId() {
