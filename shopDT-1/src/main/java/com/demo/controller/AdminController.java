@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entity.LoaiSp;
+import com.demo.entity.Sanpham;
 import com.demo.service.LoaiSpService;
+import com.demo.service.SanphamService;
 
 @Controller
 @RequestMapping(value="/admin")
@@ -24,6 +26,9 @@ public class AdminController {
 
     @Autowired
     private LoaiSpService loaiSpService;
+    
+    @Autowired
+    private SanphamService sanphamService;
 
     //api loại SP---------------------------------------------------------------------------------
 	@RequestMapping(value = "/loaiSp", method = RequestMethod.GET)
@@ -73,7 +78,7 @@ public class AdminController {
 	//api SP---------------------------------------------------------------------------------
 	@RequestMapping(value = "/sanpham", method = RequestMethod.GET)
 	public String list(Model model) {
-        model.addAttribute("loaiSps", loaiSpService.findAll());
+        model.addAttribute("sanphams", sanphamService.findAll());
         return "listSanpham";
     }
 
@@ -82,28 +87,28 @@ public class AdminController {
         if (StringUtils.isEmpty(term)) {
             return "redirect:/admin/sanpham";
         }
-        model.addAttribute("loaiSps", loaiSpService.search(term));
-        return "listLoaiSp";
+        model.addAttribute("sanphams", sanphamService.search(term));
+        return "listSanpham";
     }
 
 	@RequestMapping(value = "/sanpham/add", method = RequestMethod.GET)
     public String add(Model model) {
-        model.addAttribute("loaiSp", new LoaiSp());
-        return "form";
+        model.addAttribute("sanpham", new Sanpham());
+        return "formSanpham";
     }
 
 	@RequestMapping(value = "/sanpham/{id}/edit", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Integer id, Model model) {
-        model.addAttribute("loaiSp", loaiSpService.findOne(id));
-        return "form";
+        model.addAttribute("sanpham", sanphamService.findOne(id));
+        return "formSanpham";
     }
 
 	@RequestMapping(value = "/sanpham/save", method = RequestMethod.POST)
-    public String save(@Valid LoaiSp loaiSp, BindingResult result, RedirectAttributes redirect) {
+    public String save(@Valid Sanpham sanpham, BindingResult result, RedirectAttributes redirect) {
         if (result.hasErrors()) {
-            return "form";
+            return "formSanpham";
         }
-        loaiSpService.save(loaiSp);
+        sanphamService.save(sanpham);
         redirect.addFlashAttribute("successMessage", "Saved sanpham successfully!");
         return "redirect:/admin/sanpham";
     }

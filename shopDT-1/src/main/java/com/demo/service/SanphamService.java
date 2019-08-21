@@ -2,6 +2,8 @@ package com.demo.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.demo.entity.Sanpham;
 
 public interface SanphamService {
