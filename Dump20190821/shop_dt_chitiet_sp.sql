@@ -1,15 +1,15 @@
-CREATE DATABASE  IF NOT EXISTS `shop_dt` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `shop_dt` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `shop_dt`;
--- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
 --
 -- Host: localhost    Database: shop_dt
 -- ------------------------------------------------------
--- Server version	8.0.16
+-- Server version	5.7.27-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -18,28 +18,29 @@ USE `shop_dt`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `giohang`
+-- Table structure for table `chitiet_sp`
 --
 
-DROP TABLE IF EXISTS `giohang`;
+DROP TABLE IF EXISTS `chitiet_sp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `giohang` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chitiet_sp` (
   `id` int(11) NOT NULL,
-  `userID` int(11) DEFAULT NULL,
+  `gia` int(11) DEFAULT NULL,
+  `ten` varchar(255) DEFAULT NULL,
+  `loaiid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `userID_idx` (`userID`),
-  CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FKdo69cb2qjv3ch5tp1k971d3gx` (`loaiid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `giohang`
+-- Dumping data for table `chitiet_sp`
 --
 
-LOCK TABLES `giohang` WRITE;
-/*!40000 ALTER TABLE `giohang` DISABLE KEYS */;
-/*!40000 ALTER TABLE `giohang` ENABLE KEYS */;
+LOCK TABLES `chitiet_sp` WRITE;
+/*!40000 ALTER TABLE `chitiet_sp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `chitiet_sp` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-19  9:31:45
+-- Dump completed on 2019-08-21 17:25:52
