@@ -11,8 +11,8 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "chitiet_sp")
-public class ChitietSp implements java.io.Serializable{
+@Table(name = "sanpham")
+public class Sanpham implements java.io.Serializable{
 	public static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,6 +29,17 @@ public class ChitietSp implements java.io.Serializable{
 	
 	@Column(name = "gia")
 	private Integer gia;
+	
+	@Column(name = "soluong")
+	private Integer soluong;
+
+	public Integer getSoluong() {
+		return soluong;
+	}
+
+	public void setSoluong(Integer soluong) {
+		this.soluong = soluong;
+	}
 
 	public Integer getId() {
 		return id;

@@ -34,16 +34,16 @@ public class LoaiSp implements java.io.Serializable{
 		this.soluong = soluong;
 	}
 
-	public Set<ChitietSp> getChitietSps() {
-		return chitietSps;
+	public Set<Sanpham> getChitietSps() {
+		return sanphams;
 	}
 
-	public void setChitietSps(Set<ChitietSp> chitietSps) {
-		this.chitietSps = chitietSps;
+	public void setChitietSps(Set<Sanpham> sanphams) {
+		this.sanphams = sanphams;
 	}
 
 	@OneToMany(mappedBy="loaiSp")
-	    private Set<ChitietSp> chitietSps;
+	    private Set<Sanpham> sanphams;
 
 	public Integer getId() {
 		return id;
