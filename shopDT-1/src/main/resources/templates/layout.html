@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+
 <head th:fragment="head">
 <!-- Required meta tags -->
 <meta charset="utf-8" />
@@ -11,17 +13,11 @@
 	rel="shortcut icon" />
 
 <!-- Bootstrap CSS -->
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous" />
+<link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 <!-- Font Awesome -->
-<link
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet"
-	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-	crossorigin="anonymous" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Material Design Bootstrap -->
+<link href="../static/css/mdb.min.css" th:href="@{/css/mdb.min.css}" rel="stylesheet">
 <!-- Custom style -->
 <link href="../static/css/style.css" th:href="@{/css/style.css}"
 	rel="stylesheet" />
@@ -34,14 +30,17 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
+<!-- JQuery -->
+<script type="text/javascript" src="../static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="../static/js/mdb.min.js" th:src="@{/js/mdb.min.js}"></script>
+<!-- Custom JavaScript -->
+<script type="text/javascript" src="../static/js/mycustom.js" th:src="@{/js/mycustom.js}"></script>
+
 </head>
 
 <body>
@@ -103,6 +102,7 @@
 			e.preventDefault();
 			$("#wrapper").toggleClass("toggled");
 		});
+		
 	</script>
 	<footer th:fragment="footer" class="container">
 		<strong>&copy; 2018 Ashina</strong>
