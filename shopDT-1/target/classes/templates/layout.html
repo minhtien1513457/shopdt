@@ -47,7 +47,7 @@
 	<!--navigation-->
 	<nav th:fragment="header"
 		class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-		<button class="btn btn-primary" id="menu-toggle"><i class="fa fa-sliders"></i></button>
+		<button class="btn btn-primary btn-sm" id="menu-toggle"><i class="fas fa-align-left"></i></button>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -102,7 +102,10 @@
 			e.preventDefault();
 			$("#wrapper").toggleClass("toggled");
 		});
-		
+		$('#dtBasicExample').mdbEditor({
+			mdbEditor: true
+			});
+			$('.dataTables_length').addClass('bs-select');
 	</script>
 	<footer th:fragment="footer" class="container">
 		<strong>&copy; 2018 Ashina</strong>

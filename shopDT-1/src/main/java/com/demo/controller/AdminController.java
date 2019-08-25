@@ -94,6 +94,7 @@ public class AdminController {
 	@RequestMapping(value = "/sanpham/add", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("sanpham", new Sanpham());
+        model.addAttribute("loaiSps", loaiSpService.findAll());
         return "formSanpham";
     }
 
