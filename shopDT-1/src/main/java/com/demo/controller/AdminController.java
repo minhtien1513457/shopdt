@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entity.LoaiSp;
 import com.demo.entity.Sanpham;
+import com.demo.service.ChitietSpService;
 import com.demo.service.LoaiSpService;
 import com.demo.service.SanphamService;
 
@@ -29,6 +30,9 @@ public class AdminController {
     
     @Autowired
     private SanphamService sanphamService;
+    
+    @Autowired
+    private ChitietSpService chitietSpService;
 
     //api loại SP---------------------------------------------------------------------------------
 	@RequestMapping(value = "/loaiSp", method = RequestMethod.GET)
@@ -120,5 +124,52 @@ public class AdminController {
         redirect.addFlashAttribute("successMessage", "Deleted loai SP successfully!");
         return "redirect:/admin/sanpham";
     }
+	
+	//api chi tiet san pham
+	//api SP---------------------------------------------------------------------------------
+		@RequestMapping(value = "/chitietSp", method = RequestMethod.GET)
+		public String listChitietSp(Model model) {
+	        model.addAttribute("chitietSps", chitietSpService.findAll());
+	        return "listChitietSp";
+	    }
+
+		@RequestMapping(value = "/chitietSp/search", method = RequestMethod.GET)
+	    public String searchChitietSp(@RequestParam("term") String term, Model model) {
+	        if (StringUtils.isEmpty(term)) {
+	            return "redirect:/admin/chitietSp";
+	        }
+	        model.addAttribute("chitietSps", chitietSpService.search(term));
+	        return "listChitietSp";
+	    }
+
+		@RequestMapping(value = "/chitietSp/add", method = RequestMethod.GET)
+	    public String addChitietSp(Model model) {
+	        model.addAttribute("sanpham", new Sanpham());
+	        model.addAttribute("loaiSps", loaiSpService.findAll());
+	        return "formChitietSp";
+	    }
+
+		@RequestMapping(value = "/chitietSp/{id}/edit", method = RequestMethod.GET)
+	    public String editChitietSp(@PathVariable("id") Integer id, Model model) {
+	        model.addAttribute("chitietSp", loaiSpService.findOne(id));
+	        return "formChitietSp";
+	    }
+
+		@RequestMapping(value = "/chitietSp/save", method = RequestMethod.POST)
+	    public String saveChitietSp(@Valid Sanpham sanpham, BindingResult result, RedirectAttributes redirect) {
+	        if (result.hasErrors()) {
+	            return "formChitietSp";
+	        }
+	        sanphamService.save(sanpham);
+	        redirect.addFlashAttribute("successMessage", "Saved sanpham successfully!");
+	        return "redirect:/admin/chitietSp";
+	    }
+
+		@RequestMapping(value = "/chitietSp/{id}/delete", method = RequestMethod.GET)
+	    public String deleteChitietSp(@PathVariable int id, RedirectAttributes redirect) {
+	    	loaiSpService.delete(id);
+	        redirect.addFlashAttribute("successMessage", "Deleted loai SP successfully!");
+	        return "redirect:/admin/chitietSp";
+	    }
 
 }

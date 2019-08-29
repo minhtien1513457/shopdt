@@ -1,14 +1,6 @@
 package com.demo.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 
 @Entity
 @Table(name = "sanpham")
@@ -32,6 +24,9 @@ public class Sanpham implements java.io.Serializable{
 	
 	@Column(name = "soluong")
 	private Integer soluong;
+	
+	@OneToOne(mappedBy = "sanpham")
+    private ChitietSp chitietSp;
 
 	public Integer getSoluong() {
 		return soluong;
