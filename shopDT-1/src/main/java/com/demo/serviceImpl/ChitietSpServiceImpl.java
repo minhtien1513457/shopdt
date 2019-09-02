@@ -2,12 +2,17 @@ package com.demo.serviceImpl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.demo.entity.ChitietSp;
+import com.demo.entity.UploadFile;
 import com.demo.repository.ChitietSpRepository;
 import com.demo.service.ChitietSpService;
 
+@Service
 public class ChitietSpServiceImpl implements ChitietSpService{
 	@Autowired
 	private ChitietSpRepository chitietSpRepository;

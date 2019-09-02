@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+	<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+	<div th:replace="layout :: sidebar"></div>    
+	<!-- /#sidebar-wrapper -->
+
+    <div id="page-content-wrapper">
+	<div th:replace="layout :: header"></div>    
+	<br>
+	<!-- Page Content -->
+	 <div class="container-fluid">
+     <div class="row">
+			<div class="col-6 no-padding">
+				<form class="form-inline" action="#" th:action="@{/admin/chitietSp/search}" method="get">
+					<input class="form-control mr-sm-2" type="search" name="term" placeholder="Search by name ..." />
+					<button class="btn btn-primary" type="submit">
+						<i class="fa fa-search"></i> Search
+					</button>
+				</form>
+			</div>
+
+			<div class="col-6 no-padding">
+				<a href="#" th:href="@{/admin/chitietSp/add}" class="btn btn-success float-right">
+					<i class="fa fa-plus-square"></i> Thêm chi tiết sản phẩm
+				</a>
+			</div>
+		</div>
+
+		<div class="row mt-4">
+			<div th:if="${successMessage}" class="col-12 alert alert-success alert-dismissible fade show" role="alert">
+				<span th:text="${successMessage}"></span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<th:block th:if="${#lists.isEmpty(chitietSps)}">
+				<h5>no data</h5>
+			</th:block>
+
+			<th:block th:unless="${#lists.isEmpty(chitietSps)}">
+				<div class="table-responsive">
+					<h5></h5>
+					<table class="table table-hover ">
+						<thead>
+						<tr>
+							<th>#</th>
+							<th>Loại sản phẩm</th>
+							<th>Tên sản phẩm</th>
+							<th>Hình</th>
+							<th>Mô tả</th>
+							<th>Giá</th>
+							<th>Số lượng</th>
+							<th></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="chitietSp,iterStat : ${chitietSps}">
+							<th scope="row" th:text="${iterStat.count}"></th>
+							<td th:text="${chitietSp.sanpham.loaiSp.ten}"></td>
+							<td th:text="${chitietSp.sanpham.ten}"></td>							
+							<td th:text="${chitietSp.hinh}"></td>
+							<td th:text="${chitietSp.mota}"></td>
+							<td th:text="${chitietSp.sanpham.gia}"></td>
+							<td th:text="${chitietSp.sanpham.soluong}"></td>
+							<td>
+								<a href="#" th:href="@{/admin/chitietSp/{id}/edit(id=${chitietSp.id})}" class="mr-sm-2 text-primary">
+									<i class="fa fa-edit"></i>
+								</a>
+								<a href="#" th:href="@{/admin/chitietSp/{id}/delete(id=${chitietSp.id})}" class="text-danger">
+									<i class="fa fa-trash"></i>
+								</a>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</th:block>
+		</div>
+	</div>
+	</div>
+	<!-- /.container -->
+    <!-- /#page-content-wrapper -->
+  </div>
+  <!-- /#wrapper -->
+	<script th:replace="layout :: script"></script>
+	<footer th:replace="layout :: footer"></footer>
+  <!-- /#wrapper -->
+</body>
+</html>

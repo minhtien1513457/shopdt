@@ -2,7 +2,7 @@ package com.demo.service;
 
 import java.util.List;
 
-import com.demo.entity.ChitietSp;;
+import com.demo.entity.ChitietSp;
 
 public interface ChitietSpService {
 	Iterable<ChitietSp> findAll();
@@ -11,7 +11,7 @@ public interface ChitietSpService {
 
 	ChitietSp findOne(int id);
 
-	void save(ChitietSp loaiSp);
+    void save(ChitietSp chitietSp);
 
 	void delete(int id);
 }

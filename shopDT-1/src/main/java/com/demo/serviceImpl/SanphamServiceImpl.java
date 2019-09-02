@@ -33,7 +33,6 @@ public class SanphamServiceImpl implements SanphamService {
 	@Override
 	public void save(Sanpham sanpham) {
 		sanphamRepository.save(sanpham);
-		Sanpham x =new Sanpham();
 	}
 
 	@Override

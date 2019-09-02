@@ -2,19 +2,9 @@ package com.demo.entity;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class MyUploadForm {
-	 private String description;
-	 
+public class UploadFile{ 	 
 	    // Upload files.
 	    private MultipartFile[] fileDatas;
-	 
-	    public String getDescription() {
-	        return description;
-	    }
-	 
-	    public void setDescription(String description) {
-	        this.description = description;
-	    }
 	 
 	    public MultipartFile[] getFileDatas() {
 	        return fileDatas;

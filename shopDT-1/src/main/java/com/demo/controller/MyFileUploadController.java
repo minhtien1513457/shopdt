@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.demo.entity.MyUploadForm;
+import com.demo.entity.UploadFile;
 
 @Controller
 public class MyFileUploadController {
@@ -33,7 +33,7 @@ public class MyFileUploadController {
     @RequestMapping(value = "/uploadOneFile", method = RequestMethod.GET)
     public String uploadOneFileHandler(Model model) {
  
-        MyUploadForm myUploadForm = new MyUploadForm();
+        UploadFile myUploadForm = new UploadFile();
         model.addAttribute("myUploadForm", myUploadForm);
         return "uploadOneFile";
     }
@@ -42,7 +42,7 @@ public class MyFileUploadController {
     @RequestMapping(value = "/uploadOneFile", method = RequestMethod.POST)
     public String uploadOneFileHandlerPOST(HttpServletRequest request, //
             Model model, //
-            MyUploadForm myUploadForm) {
+            UploadFile myUploadForm) {
     	model.addAttribute("myUploadForm", myUploadForm);
         return this.doUpload(request, model, myUploadForm);
  
@@ -52,7 +52,7 @@ public class MyFileUploadController {
     @RequestMapping(value = "/uploadMultiFile", method = RequestMethod.GET)
     public String uploadMultiFileHandler(Model model) {
  
-        MyUploadForm myUploadForm = new MyUploadForm();
+        UploadFile myUploadForm = new UploadFile();
         model.addAttribute("myUploadForm", myUploadForm);
  
         return "uploadMultiFile";
@@ -62,18 +62,14 @@ public class MyFileUploadController {
     @RequestMapping(value = "/uploadMultiFile", method = RequestMethod.POST)
     public String uploadMultiFileHandlerPOST(HttpServletRequest request, //
             Model model, //
-            @ModelAttribute("myUploadForm") MyUploadForm myUploadForm) {
+            @ModelAttribute("myUploadForm") UploadFile myUploadForm) {
  
         return this.doUpload(request, model, myUploadForm);
  
     }
  
     private String doUpload(HttpServletRequest request, Model model, //
-            MyUploadForm myUploadForm) {
- 
-        String description = myUploadForm.getDescription();
-        System.out.println("Description: " + description);
- 
+            UploadFile myUploadForm) { 
         // Thư mục gốc upload file.
         String uploadRootPath = request.getServletContext().getRealPath("upload");
         System.out.println("uploadRootPath=" + uploadRootPath);
@@ -111,7 +107,6 @@ public class MyFileUploadController {
                 }
             }
         }
-        model.addAttribute("description", description);
         model.addAttribute("uploadedFiles", uploadedFiles);
         model.addAttribute("failedFiles", failedFiles);
         return "uploadResult";

@@ -3,9 +3,11 @@ package com.demo.entity;
 import javax.persistence.*;
 
 @Entity
-public class ChitietSp {
+public class ChitietSp implements java.io.Serializable{
+	public static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", nullable=false)
 	private Integer id;
 	
@@ -47,7 +49,7 @@ public class ChitietSp {
 	@Column(name = "hinh")
 	private String hinh;
 	
-	 @OneToOne(cascade = CascadeType.ALL)
-	    @JoinColumn(name = "sanphamId")
-	    private Sanpham sanpham;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "sanphamID")
+	private Sanpham sanpham;
 }

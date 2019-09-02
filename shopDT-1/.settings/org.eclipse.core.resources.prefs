@@ -1,7 +1,9 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/templates/formChitietSp.html=UTF-8
 encoding//src/main/resources/templates/formLoaiSp.html=UTF-8
 encoding//src/main/resources/templates/formSanpham.html=UTF-8
+encoding//src/main/resources/templates/listChitietSp.html=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8
