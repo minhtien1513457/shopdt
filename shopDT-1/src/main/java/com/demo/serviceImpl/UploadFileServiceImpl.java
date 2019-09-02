@@ -20,7 +20,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 	@Override
 	public List<File> doUpload(HttpServletRequest request, UploadFile myUploadForm) {
 		// Thư mục gốc upload file.
-		String uploadRootPath = request.getServletContext().getRealPath("upload");
+		String uploadRootPath = request.getServletContext().getRealPath("WEB-INF/resources/images");
 		File uploadRootDir = new File(uploadRootPath);
 		// Tạo thư mục gốc upload nếu nó không tồn tại.
 		if (!uploadRootDir.exists()) {
