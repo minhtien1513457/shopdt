@@ -6,8 +6,10 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,11 +18,14 @@ import com.demo.service.UploadFileService;
 
 @Service
 public class UploadFileServiceImpl implements UploadFileService {
+	@Autowired
+	ServletContext servletContext;
 
 	@Override
 	public List<File> doUpload(HttpServletRequest request, UploadFile myUploadForm) {
 		// Thư mục gốc upload file.
-		String uploadRootPath = request.getServletContext().getRealPath("WEB-INF/resources/images");
+		//String uploadRootPath = request.getServletContext().getRealPath("");
+		String uploadRootPath = "D:\\java git\\shopdt\\shopDT-1\\src\\main\\resources\\static\\images";
 		File uploadRootDir = new File(uploadRootPath);
 		// Tạo thư mục gốc upload nếu nó không tồn tại.
 		if (!uploadRootDir.exists()) {
