@@ -63,7 +63,7 @@ public class AuthController {
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 userDetails.getAuthorities().toString(),
-                expiration));
+                expiration, true));
     }
 
     @PostMapping("/signup")

@@ -1,0 +1,28 @@
+.form-element {
+  // padding: 5px 0px 25px 2px;
+  width: 100%;
+  justify-content: center;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  background-color: #ffffff 
+}
+
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.signup {
+  font-size: 8px;
+}
+
+mat-card {
+  width: calc(30% - 70px);
+  height: calc(30% - 70px);
+}

@@ -16,12 +16,14 @@ public class JwtResponse {
     private String email;
     private String role;
     private String expire;
+    private boolean success;
 
-    public JwtResponse(String accessToken, String username, String email, String role, String expire) {
+    public JwtResponse(String accessToken, String username, String email, String role, String expire, boolean success) {
         this.token = accessToken;
         this.username = username;
         this.email = email;
         this.role = role;
         this.expire = expire;
+        this.success = success;
     }
 }
