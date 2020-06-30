@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
@@ -19,6 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     IUserDao userDao;
@@ -55,8 +57,8 @@ public class UserServiceImpl implements UserService {
         if (users != null && !CollectionUtils.isEmpty(users.getContent())) {
             res = new Paging<UserVO>();
             List<UserVO> userVOs = new LinkedList<UserVO>();
-            for (User app: users.getContent()) {
-                userVOs.add(populateUser(app));
+            for (User u: users.getContent()) {
+                userVOs.add(populateUser(u));
             }
             res.setLstData(userVOs);
             setPagingResult(res, users, page, size);

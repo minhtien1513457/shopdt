@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, timeout } from 'rxjs/operators';
 import { JwtService } from './jwt.service';
-import { ApiConfigService } from './api-config.service';
+import * as data from '../../../assets/config/config.dev.json';
 
 @Injectable()
 export class ApiService {
@@ -17,10 +17,7 @@ export class ApiService {
     private jwtService: JwtService,
     private router: Router,
   ) {
-    this.httpClient.get(this._jsonURL).subscribe(data =>  {
-     this.urlServer = data;
-     console.log(this.urlServer)
-    });
+      this.urlServer = data.apiServer.api_url;
   }
 
   /**Set header api */
@@ -30,9 +27,10 @@ export class ApiService {
         'Content-Type': 'application/json'
       }
     );
+
     if (this.jwtService.getTicket()) {
-      header = header.append('Authorization', 'Bearer ' + this.jwtService.getTicket().ticket);
-      header = header.append('username', this.jwtService.getTicket().userName);
+      header = header.append('Authorization', 'Bearer ' + this.jwtService.getTicket());
+      header = header.append('username', this.jwtService.getUsername());
       header = header.append('language', this.jwtService.getLanguage());
     }
     return header;
@@ -42,8 +40,8 @@ export class ApiService {
   private setHeadersGet(): HttpHeaders {
     let header = new HttpHeaders();
     if (this.jwtService.getTicket()) {
-      header = header.append('Authorization', 'Bearer ' + this.jwtService.getTicket().ticket);
-      header = header.append('username', this.jwtService.getTicket().userName);
+      header = header.append('Authorization', 'Bearer ' + this.jwtService.getTicket());
+      header = header.append('username', this.jwtService.getUsername());
       header = header.append('language', this.jwtService.getLanguage());
     }
     return header;
@@ -53,9 +51,7 @@ export class ApiService {
   private formatErrors(error: HttpErrorResponse) {
     if (error instanceof HttpErrorResponse) {
       if (error.error instanceof ErrorEvent) {
-
       } else {
-
         switch (error.status) {
           case 401:      //login
             this.navigateLogin();
@@ -96,10 +92,9 @@ export class ApiService {
   /**Method get */
   get({ path, params }: { path: string; params?: HttpParams; }): Observable<any> {
     return this.httpClient.get(
-      `${this.urlServer.apiServer.api_url}${path}`,
+      `${this.urlServer}${path}`,
       {
         headers: this.setHeadersGet(),
-        // tslint:disable-next-line:object-literal-shorthand
         params: params
       }
     ).pipe(
@@ -112,7 +107,7 @@ export class ApiService {
   /**Method put */
   put(path: string, body: Object = {}): Observable<any> {
     return this.httpClient.put(
-      `${this.urlServer.apiServer.api_url}${path}`,
+      `${this.urlServer}${path}`,
       JSON.stringify(body),
       { headers: this.setHeaders() }
     )
@@ -126,7 +121,7 @@ export class ApiService {
 /**Method post */
   post(path: string, body: Object = {}): Observable<any> {
     return this.httpClient.post(
-      `${this.urlServer.apiServer.api_url}${path}`,
+      `${this.urlServer}${path}`,
       JSON.stringify(body),
       { headers: this.setHeaders() }
     ).pipe(
@@ -139,7 +134,7 @@ export class ApiService {
 /**Method delete */
   delete({ path, params }: { path: string; params?: HttpParams; }): Observable<any> {
     return this.httpClient.delete(
-      `${this.urlServer.apiServer.api_url}${path}`,
+      `${this.urlServer}${path}`,
       {
         headers: this.setHeaders(),
         params: params

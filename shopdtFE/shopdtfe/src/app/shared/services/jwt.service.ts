@@ -9,15 +9,22 @@ export class JwtService {
   private readonly LANG = 'lang';
   private readonly EXPIRED = 'expired';
   private readonly ROLE = 'role';
+  private readonly USERNAME = 'username';
+
 
   /**Save ticket */
   saveTicket(data) {
-    window.localStorage.setItem(this.TICKET, JSON.stringify(data));
+    window.localStorage.setItem(this.TICKET, data);
   }
 
   /**Save role */
   saveRole(data) {
     window.localStorage.setItem(this.ROLE, data);
+  }
+
+  /**Save username */
+  saveUsername(data) {
+    window.localStorage.setItem(this.USERNAME, data);
   }
 
   /**Save expired */
@@ -55,16 +62,20 @@ export class JwtService {
     return window.localStorage.getItem(this.ROLE);
   }
 
+    /**Get role */
+    getUsername() {
+      if (!window.localStorage.getItem(this.USERNAME)) {
+        return null;
+      }
+      return window.localStorage.getItem(this.USERNAME);
+    }
+
   /**Get ticket */
   getTicket() {
     if (!window.localStorage.getItem(this.TICKET)) {
       return null;
     }
-    const ticketObj = JSON.parse(window.localStorage.getItem(this.TICKET));
-    return {
-      ticket: ticketObj.ticket,
-      userName: ticketObj.userName
-    };
+    return window.localStorage.getItem(this.TICKET);
   }
 
   /**Clear local storage */

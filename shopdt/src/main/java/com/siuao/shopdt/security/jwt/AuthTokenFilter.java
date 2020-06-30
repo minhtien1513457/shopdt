@@ -1,9 +1,14 @@
 package com.siuao.shopdt.security.jwt;
 
+import com.siuao.shopdt.request.RequestInfo;
+import com.siuao.shopdt.response.BaseResult;
 import com.siuao.shopdt.service.impl.UserDetailsServiceImpl;
+import com.siuao.shopdt.utils.ThreadLocalHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

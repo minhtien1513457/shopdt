@@ -2,12 +2,15 @@ package com.siuao.shopdt.vo;
 
 import com.siuao.shopdt.entity.Role;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class UserVO {
     private Long id;

@@ -2,11 +2,14 @@ package com.siuao.shopdt.request;
 
 import com.siuao.shopdt.entity.Role;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class UpdateUserRequest {
     private Long id;

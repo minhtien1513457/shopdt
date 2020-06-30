@@ -1,15 +1,19 @@
 package com.siuao.shopdt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.siuao.shopdt.constant.ERole;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "role")
 public class Role {
@@ -22,6 +26,7 @@ public class Role {
     private ERole name;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-    private Set<User> users = new HashSet<User>();
+    @JsonIgnore
+    private Set<User> users;
 }
 
