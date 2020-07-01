@@ -36,6 +36,9 @@ CREATE TABLE IF NOT EXISTS `os` (
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -47,6 +50,9 @@ CREATE TABLE IF NOT EXISTS `type` (
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -54,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` tinytext,
+  `status` tinyint(4) DEFAULT NULL,
   `os_id`  int(11) UNSIGNED NOT NULL,
   `type_id`  int(11) UNSIGNED NOT NULL,
   `price`   bigint NOT NULL,
@@ -61,6 +68,9 @@ CREATE TABLE IF NOT EXISTS `product` (
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_product_2_os` FOREIGN KEY (`os_id`) REFERENCES `os` (`id`),
   CONSTRAINT `FK_product_2_type` FOREIGN KEY (`type_id`) REFERENCES `type` (`id`)
@@ -74,6 +84,9 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_gallery_2_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -86,6 +99,9 @@ CREATE TABLE IF NOT EXISTS `action` (
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -109,6 +125,9 @@ CREATE TABLE IF NOT EXISTS `review` (
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_review_2_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -132,6 +151,9 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_cart_2_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -155,6 +177,9 @@ CREATE TABLE IF NOT EXISTS `historybuy` (
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_historybuy_2_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
