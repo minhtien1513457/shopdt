@@ -50,4 +50,7 @@ public class ProductEntity implements Serializable{
     @JsonIgnore
     private Set<ActionEntity> actions = new HashSet<ActionEntity>();
 
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    private Set<GalleryEntity> galleries = new HashSet<GalleryEntity>();
 }
