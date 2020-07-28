@@ -1,6 +1,19 @@
 package com.siuao.shopdt.controllers;
 
-import com.siuao.shopdt.entity.RootEntity;
+import static net.logstash.logback.marker.Markers.append;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.siuao.shopdt.log.entity.RootEntity;
 import com.siuao.shopdt.paging.Paging;
 import com.siuao.shopdt.request.RequestInfo;
 import com.siuao.shopdt.response.ResponseResult;
@@ -10,13 +23,6 @@ import com.siuao.shopdt.service.UserService;
 import com.siuao.shopdt.utils.LogUtil;
 import com.siuao.shopdt.utils.ThreadLocalHelper;
 import com.siuao.shopdt.vo.UserVO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import javax.ws.rs.core.Context;
-
-import javax.servlet.http.HttpServletRequest;
-import static net.logstash.logback.marker.Markers.append;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

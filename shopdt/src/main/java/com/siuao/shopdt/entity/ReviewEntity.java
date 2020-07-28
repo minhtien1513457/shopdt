@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -17,7 +23,12 @@ import java.time.LocalDateTime;
 @Table(name = "review")
 public class ReviewEntity implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5460748572417564452L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, insertable = false)
     private Long id;
@@ -34,6 +45,32 @@ public class ReviewEntity implements Serializable {
     @Column(name = "updated_user")
     private String updatedUser;
 
-    @Column(name = "created_date")
+    @CreationTimestamp
+    @Column(name = "created_date", nullable = false)
     private LocalDateTime createdDate;
+
+    @UpdateTimestamp
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
+    
+    @Column(name = "deleted")
+    private Integer deleted;
+    
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+    
+    @Column(name = "deleted_by")
+    private Long deletedBy;
+    
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    @JsonIgnore
+    private ProductEntity product;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+    
+    
 }

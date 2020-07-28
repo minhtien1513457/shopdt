@@ -1,21 +1,34 @@
 package com.siuao.shopdt.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(	name = "user",
         uniqueConstraints = {
@@ -44,6 +57,13 @@ public class User {
 
     @Column(name = "status")
     private Integer status;
+    
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<ReviewEntity> reviews = new HashSet<ReviewEntity>();
+    
+    @OneToOne(mappedBy = "user")
+    private CartEntity cart;
 
     @Column(name = "created_user", nullable = false)
     private String createdUser;

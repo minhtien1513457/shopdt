@@ -1,4 +1,4 @@
-package com.siuao.shopdt.entity;
+package com.siuao.shopdt.log.entity;
 
 import java.util.Collection;
 import java.util.HashMap;

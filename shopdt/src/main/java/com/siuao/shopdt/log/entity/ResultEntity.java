@@ -1,8 +1,8 @@
-package com.siuao.shopdt.entity;
+package com.siuao.shopdt.log.entity;
 
 import com.siuao.shopdt.utils.StringUtil;
 
-public class ResultEntity extends BaseEntity {
+public class ResultEntity extends BaseEntity{
 
 	private String id;
 	

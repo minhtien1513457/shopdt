@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `os` (
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `type` (
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_product_2_os` FOREIGN KEY (`os_id`) REFERENCES `os` (`id`),
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_gallery_2_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `action` (
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -119,6 +119,7 @@ CREATE TABLE IF NOT EXISTS `action_product` (
 CREATE TABLE IF NOT EXISTS `review` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id`  int(11) UNSIGNED NOT NULL,
+  `product_id`  int(11) UNSIGNED NOT NULL,
   `content` varchar(255) NOT NULL,
   `star`  int(11) UNSIGNED,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -126,33 +127,23 @@ CREATE TABLE IF NOT EXISTS `review` (
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_review_2_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `review_product` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` int(11) UNSIGNED NOT NULL,
-  `review_id` int(11) UNSIGNED NOT NULL,
-  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `FK_review_product_2_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
-  CONSTRAINT `FK_review_product_2_review` FOREIGN KEY (`review_id`) REFERENCES `review` (`id`)
+  CONSTRAINT `FK_review_2_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cart` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id`  int(11) UNSIGNED NOT NULL,
-  `total`  int(11) UNSIGNED,
+  `amount`  int(11) UNSIGNED,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_cart_2_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
@@ -178,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `historybuy` (
   `created_user` varchar(255) NOT NULL,
   `updated_user` varchar(255) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_historybuy_2_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)

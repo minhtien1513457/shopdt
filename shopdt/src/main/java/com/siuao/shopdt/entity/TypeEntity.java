@@ -22,7 +22,12 @@ import java.util.Set;
 @Table(name = "type")
 public class TypeEntity implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2477762394712380050L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, insertable = false)
     private Long id;
@@ -40,12 +45,21 @@ public class TypeEntity implements Serializable {
     private String updatedUser;
 
     @CreationTimestamp
-    @Column(name= "created_date", nullable = false)
-    private LocalDateTime createDate;
+    @Column(name = "created_date", nullable = false)
+    private LocalDateTime createdDate;
 
     @UpdateTimestamp
     @Column(name = "updated_date")
     private LocalDateTime updatedDate;
+    
+    @Column(name = "deleted")
+    private Integer deleted;
+    
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+    
+    @Column(name = "deleted_by")
+    private Long deletedBy;
 
     @OneToMany(mappedBy = "type")
     @JsonIgnore
