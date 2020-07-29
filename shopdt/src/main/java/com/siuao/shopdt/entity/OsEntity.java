@@ -38,6 +38,10 @@ public class OsEntity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @OneToMany(mappedBy = "os")
+    @JsonIgnore
+    private Set<ProductEntity> products = new HashSet<ProductEntity>();
+
     @Column(name = "created_user", nullable = false)
     private String createdUser;
 
@@ -60,9 +64,4 @@ public class OsEntity implements Serializable {
     
     @Column(name = "deleted_by")
     private Long deletedBy;
-
-    @OneToMany(mappedBy = "os")
-    @JsonIgnore
-    private Set<ProductEntity> products = new HashSet<ProductEntity>();
-
 }

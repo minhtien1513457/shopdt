@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -52,28 +53,8 @@ public class ProductEntity implements Serializable{
     @Column(name = "price")
     private Long price;
     
-    @Column(name = "created_user", nullable = false)
-    private String createdUser;
-
-    @Column(name = "updated_user")
-    private String updatedUser;
-
-    @CreationTimestamp
-    @Column(name = "created_date", nullable = false)
-    private LocalDateTime createdDate;
-
-    @UpdateTimestamp
-    @Column(name = "updated_date")
-    private LocalDateTime updatedDate;
-    
-    @Column(name = "deleted")
-    private Integer deleted;
-    
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
-    
-    @Column(name = "deleted_by")
-    private Long deletedBy;
+    @Column(name = "total")
+    private Integer total;
 
     @ManyToOne
     @JoinColumn(name = "os_id")
@@ -96,4 +77,36 @@ public class ProductEntity implements Serializable{
     @OneToMany(mappedBy = "product")
     @JsonIgnore
     private Set<ReviewEntity> reviews = new HashSet<ReviewEntity>();
+    
+    @OneToOne(mappedBy = "product")
+    private CartDetailEntity cartDetail;
+    
+    @OneToOne(mappedBy = "product")
+    private HistoryBuy historyBuy;
+    
+    @OneToOne(mappedBy = "product")
+    private HistorySearch historySearch;
+    
+    @Column(name = "created_user", nullable = false)
+    private String createdUser;
+
+    @Column(name = "updated_user")
+    private String updatedUser;
+
+    @CreationTimestamp
+    @Column(name = "created_date", nullable = false)
+    private LocalDateTime createdDate;
+
+    @UpdateTimestamp
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
+    
+    @Column(name = "deleted")
+    private Integer deleted;
+    
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+    
+    @Column(name = "deleted_by")
+    private Long deletedBy;
 }

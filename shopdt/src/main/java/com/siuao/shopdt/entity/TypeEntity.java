@@ -38,6 +38,10 @@ public class TypeEntity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @OneToMany(mappedBy = "type")
+    @JsonIgnore
+    private Set<ProductEntity> products = new HashSet<ProductEntity>();
+    
     @Column(name = "created_user", nullable = false)
     private String createdUser;
 
@@ -60,8 +64,4 @@ public class TypeEntity implements Serializable {
     
     @Column(name = "deleted_by")
     private Long deletedBy;
-
-    @OneToMany(mappedBy = "type")
-    @JsonIgnore
-    private Set<ProductEntity> products = new HashSet<ProductEntity>();
 }

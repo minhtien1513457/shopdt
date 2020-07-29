@@ -38,7 +38,17 @@ public class ReviewEntity implements Serializable {
 
     @Column(name = "star")
     private Integer star;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    @JsonIgnore
+    private ProductEntity product;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+    
     @Column(name = "created_user", nullable = false)
     private String createdUser;
 
@@ -61,16 +71,4 @@ public class ReviewEntity implements Serializable {
     
     @Column(name = "deleted_by")
     private Long deletedBy;
-    
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    @JsonIgnore
-    private ProductEntity product;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User user;
-    
-    
 }

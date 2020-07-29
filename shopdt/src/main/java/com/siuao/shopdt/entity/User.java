@@ -64,6 +64,14 @@ public class User {
     
     @OneToOne(mappedBy = "user")
     private CartEntity cart;
+    
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<HistoryBuy> historyBuy = new HashSet<HistoryBuy>();
+    
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<HistorySearch> historySearch = new HashSet<HistorySearch>();
 
     @Column(name = "created_user", nullable = false)
     private String createdUser;

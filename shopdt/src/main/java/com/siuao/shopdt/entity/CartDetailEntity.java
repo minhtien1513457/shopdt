@@ -2,8 +2,6 @@ package com.siuao.shopdt.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,16 +22,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @Entity
-@Table(name = "cart")
-public class CartEntity implements Serializable {
+@Table(name = "cart_detail")
+public class CartDetailEntity implements Serializable{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2830054227163851523L;
+	private static final long serialVersionUID = -6352434481499778956L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,12 +39,13 @@ public class CartEntity implements Serializable {
 	private Long id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private User user;
+	@JoinColumn(name = "product_id", referencedColumnName = "id")
+	private ProductEntity product;
 	
-	@OneToMany(mappedBy = "cart")
+	@ManyToOne
+	@JoinColumn(name = "cart_id")
 	@JsonIgnore
-	private Set<CartDetailEntity> cartDetail = new HashSet<CartDetailEntity>();
+	private CartEntity cart;
 	
 	@Column(name = "created_user", nullable = false)
 	private String createdUser;

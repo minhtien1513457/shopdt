@@ -46,6 +46,13 @@ public class ActionEntity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "action_product",
+            joinColumns = @JoinColumn(name = "action_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @JsonIgnore
+    private Set<ProductEntity> products = new HashSet<ProductEntity>();
+    
     @Column(name = "created_user", nullable = false)
     private String createdUser;
 
@@ -68,11 +75,4 @@ public class ActionEntity implements Serializable {
     
     @Column(name = "deleted_by")
     private Long deletedBy;
-
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "action_product",
-            joinColumns = @JoinColumn(name = "action_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    @JsonIgnore
-    private Set<ProductEntity> products = new HashSet<ProductEntity>();
 }

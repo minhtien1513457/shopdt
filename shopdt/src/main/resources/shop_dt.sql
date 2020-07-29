@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `description` tinytext,
   `status` tinyint(4) DEFAULT NULL,
   `price`   bigint NOT NULL,
+  `total`   int(11) NOT NULL,
   `os_id`  int(11) UNSIGNED NOT NULL,
   `type_id`  int(11) UNSIGNED NOT NULL,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -149,21 +150,11 @@ CREATE TABLE IF NOT EXISTS `cart` (
   CONSTRAINT `FK_cart_2_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `cart_product` (
+CREATE TABLE IF NOT EXISTS `cart_detail` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` int(11) UNSIGNED NOT NULL,
-  `cart_id` int(11) UNSIGNED NOT NULL,
-  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `FK_cart_product_2_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
-  CONSTRAINT `FK_cart_product_2_cart` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `historybuy` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id`  int(11) UNSIGNED NOT NULL,
-  `total`  int(11) UNSIGNED,
+  `cart_id`  int(11) UNSIGNED NOT NULL,
+  `product_id`  int(11) UNSIGNED NOT NULL,
+  `amount`  int(11) UNSIGNED,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_user` varchar(255) NOT NULL,
@@ -172,16 +163,42 @@ CREATE TABLE IF NOT EXISTS `historybuy` (
   `deleted_at` datetime NULL DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `FK_historybuy_2_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `FK_cart_detail_2_cart` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`),
+  CONSTRAINT `FK_cart_detail_2_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `historybuy_product` (
+CREATE TABLE IF NOT EXISTS `historybuy` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` int(11) UNSIGNED NOT NULL,
-  `historybuy_id` int(11) UNSIGNED NOT NULL,
+  `user_id`  int(11) UNSIGNED NOT NULL,
+  `product_id`  int(11) UNSIGNED NOT NULL,
+  `amount`  int(11) UNSIGNED,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_user` varchar(255) NOT NULL,
+  `updated_user` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `FK_historybuy_product_2_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
-  CONSTRAINT `FK_historybuy_product_2_historybuy` FOREIGN KEY (`historybuy_id`) REFERENCES `historybuy` (`id`)
+  CONSTRAINT `FK_historybuy_2_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+    CONSTRAINT `FK_historybuy_2_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `historysearch` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id`  int(11) UNSIGNED NOT NULL,
+  `product_id`  int(11) UNSIGNED NOT NULL,
+  `bought` tinyint(4) DEFAULT NULL,
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_user` varchar(255) NOT NULL,
+  `updated_user` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_historybuy_2_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+    CONSTRAINT `FK_historybuy_2_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
