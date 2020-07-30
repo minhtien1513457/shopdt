@@ -38,6 +38,7 @@ export class ApiUserService {
     return this.api.get({ path: url }).pipe(
       map(res => {
         return {
+          totalPage: res.totalPage,
           lstData: res.lstData,
           pageNo: res.page,
           pageSize: res.pageSize,

@@ -16,6 +16,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   public pageInit: number = 0;
   public pagesizeInit: number = 5;
   public pageIndex: number = this.pageInit;
+  public totalPage: number = this.pageInit;
   public pageSize: number = this.pagesizeInit;
   public length: number = 0;
   public pageEvent: PageEvent;
@@ -30,6 +31,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       this.pageIndex = 0;
       this.pageSize = res.pageSize;
       this.length = res.total;
+      this.totalPage = res.totalPage;
       this.dataSource = new MatTableDataSource<any>(this.listUser);
       this.dataSource.paginator = this.paginator;
     })
@@ -38,6 +40,11 @@ export class UsersComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
+
+  ngAfterViewChecked() {
+    const list = document.getElementsByClassName('mat-paginator-range-label');
+    list[0].innerHTML = 'Page: ' + this.pageIndex/this.totalPage;
+}
 
   customStatus(e) {
     if (e == 1) {
@@ -54,6 +61,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       this.pageIndex = res.pageNo-1;
       this.pageSize = res.pageSize;
       this.length = res.total;
+      this.totalPage = res.totalPage;
       this.dataSource = new MatTableDataSource<any>(this.listUser);
       },
       error =>{
