@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
         Paging<UserVO> res = null;
         Pageable pageable = null;
         if (page != null && size != null) {
-            pageable = PageRequest.of(page - 1, size, Sort.by("username").ascending());
+            pageable = PageRequest.of(page-1, size, Sort.by("username").ascending());
         }
         Page<User> users = userDao.findAll(pageable);
         if (users != null && !CollectionUtils.isEmpty(users.getContent())) {

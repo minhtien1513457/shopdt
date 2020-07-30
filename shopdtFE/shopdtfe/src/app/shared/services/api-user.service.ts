@@ -48,7 +48,7 @@ export class ApiUserService {
     )
   }
 
-  /** Get info group by id */
+  /** Get info user by id */
   getInfoUser(id: string): Observable<any> {
     const url = `user?id=${id}`;
     return this.api.get({ path: url }).pipe(

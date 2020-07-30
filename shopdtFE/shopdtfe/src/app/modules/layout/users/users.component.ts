@@ -51,9 +51,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
     console.log(JSON.stringify(e))
     this.userApi.getListUser(e.pageIndex+1, e.pageSize).subscribe(res => {
       this.listUser = res.lstData;
-     
+      this.pageIndex = res.pageNo-1;
+      this.pageSize = res.pageSize;
+      this.length = res.total;
       this.dataSource = new MatTableDataSource<any>(this.listUser);
-      this.dataSource.paginator = this.paginator;
       },
       error =>{
         // handle error

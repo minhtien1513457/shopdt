@@ -23,10 +23,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "product")
 public class ProductEntity implements Serializable{
@@ -78,14 +80,17 @@ public class ProductEntity implements Serializable{
     @JsonIgnore
     private Set<ReviewEntity> reviews = new HashSet<ReviewEntity>();
     
-    @OneToOne(mappedBy = "product")
-    private CartDetailEntity cartDetail;
+    @ManyToMany(mappedBy = "products")
+    @JsonIgnore
+    private Set<CartDetailEntity> cartDetails = new HashSet<CartDetailEntity>();
     
-    @OneToOne(mappedBy = "product")
-    private HistoryBuy historyBuy;
+    @ManyToMany(mappedBy = "products")
+    @JsonIgnore
+    private Set<HistoryBuy> historyBuy = new HashSet<HistoryBuy>();
     
-    @OneToOne(mappedBy = "product")
-    private HistorySearch historySearch;
+    @ManyToMany(mappedBy = "products")
+    @JsonIgnore
+    private Set<HistorySearch> historySearch = new HashSet<HistorySearch>();
     
     @Column(name = "created_user", nullable = false)
     private String createdUser;

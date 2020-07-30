@@ -1,6 +1,8 @@
 package com.siuao.shopdt.entity;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,8 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,10 +22,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "historybuy")
 public class HistoryBuy {
@@ -37,9 +42,11 @@ public class HistoryBuy {
 	@JsonIgnore
 	private User user;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name= "product_id", referencedColumnName = "id")
-	private ProductEntity product;
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "historybuy_product", joinColumns = @JoinColumn(name = "historybuy_id"),
+	inverseJoinColumns = @JoinColumn(name = "product_id"))
+	@JsonIgnore
+	private Set<ProductEntity> products = new HashSet<ProductEntity>();
 	
 	@Column(name = "created_user", nullable = false)
     private String createdUser;
