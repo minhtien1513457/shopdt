@@ -1,3 +1,4 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 html,
 body {
     height: 100%;
@@ -61,11 +62,6 @@ mat-sidenav mat-icon {
     cursor: pointer;
 }
 
-.mat-radio-button,
-.mat-radio-group {
-    margin-right: 25px;
-}
-
 .controlers-wrapper>* {
     width: 100%;
     padding: 0;
@@ -77,14 +73,6 @@ mat-sidenav mat-icon {
 
 .misc-bottom-padding mat-label {
     margin-right: 15px;
-}
-
-mat-radio-group mat-radio-button {
-    margin-left: 5px;
-}
-
-.button-wrapper button {
-    margin-right: 5px;
 }
 
 table.mat-table,
@@ -135,10 +123,6 @@ body .push-right {
     color: #6c75a9;
 }
 
-.button-wrapper {
-    margin: 20px 0 0 0;
-}
-
 .example-card {
     max-width: 400px;
 }
@@ -168,10 +152,6 @@ body .push-right {
 
 mat-grid-tile {
     background: lightblue;
-}
-
-.my-alternate-theme button {
-    margin-right: 10px;
 }
 
 @media (max-width:1024px) {
@@ -204,4 +184,29 @@ mat-grid-tile {
 
 .title-page {
     font-size: 200%
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.mat-column-select {
+    overflow: initial;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+button:focus,
+button:active:focus,
+button.active:focus {
+    outline: none !important;
+    outline-style: none !important;
 }

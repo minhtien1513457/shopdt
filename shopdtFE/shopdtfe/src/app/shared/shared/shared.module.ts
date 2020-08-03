@@ -42,17 +42,20 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderSidebarComponent } from 'src/app/components/header-sidebar/header-sidebar.component';
 import { RouterModule } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
-
-
+import { CreateUserModalComponent } from 'src/app/modules/modal/create-user-modal/create-user-modal.component';
 
 @NgModule({
    declarations: [
       HeaderSidebarComponent,
       HeaderComponent,
-      FooterComponent
+      FooterComponent,
+      CreateUserModalComponent
    ],
+   entryComponents: [CreateUserModalComponent],
 
   imports: [
+   MatFormFieldModule,
+   MatBadgeModule,
    CommonModule,
    FormsModule, 
    ReactiveFormsModule,
@@ -92,6 +95,8 @@ import { CdkTableModule } from '@angular/cdk/table';
   ],
   exports: [
      //export module
+     MatFormFieldModule,
+     MatBadgeModule,
      CommonModule,
      FormsModule, 
      ReactiveFormsModule,

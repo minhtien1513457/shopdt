@@ -1,37 +1,35 @@
 <div class="login">
-  <mat-card style="text-align: center;">
-    <form class="" [formGroup]="angForm" (ngSubmit)="onSubmit()">
-      <mat-card-title>Login</mat-card-title>
-      <mat-card-content>
-        <!-- username -->
-        <mat-form-field appearance="fill" class="form-element">
-          <mat-label>Enter your username</mat-label>
-          <input matInput formControlName="userID" required class="form-element">
-          <mat-error *ngIf="!angForm.controls['userID'].valid && angForm.controls['userID'].touched">
-            {{getErrorUserId()}}
-          </mat-error>
-        </mat-form-field>
-        <!-- password -->
-        <div class="example-containerexample-container">
-          <mat-form-field appearance="fill" class="form-element">
-            <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required required
-              class="form-element">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
+    <mat-card style="text-align: center;">
+        <form class="" [formGroup]="angForm" (ngSubmit)="onSubmit()">
+            <mat-card-title>Login</mat-card-title>
+            <mat-card-content>
+                <!-- username -->
+                <mat-form-field appearance="fill" class="form-element">
+                    <mat-label>Enter your username</mat-label>
+                    <input matInput formControlName="userID" required class="form-element">
+                    <mat-error *ngIf="!angForm.controls['userID'].valid && angForm.controls['userID'].touched">
+                        {{getErrorUserId()}}
+                    </mat-error>
+                </mat-form-field>
+                <!-- password -->
+                <div class="example-containerexample-container">
+                    <mat-form-field appearance="fill" class="form-element">
+                        <mat-label>Enter your password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required class="form-element">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="!angForm.controls['password'].valid && angForm.controls['password'].touched">
-              {{getErrorPassword()}}
-            </mat-error>
-          </mat-form-field>
-        </div>
+                        <mat-error *ngIf="!angForm.controls['password'].valid && angForm.controls['password'].touched">
+                            {{getErrorPassword()}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
 
-      </mat-card-content>
-      <mat-card-actions class="form-element ">
-        <button mat-raised-button color="primary" type="submit">Sign in</button>
-        <a class="sigup" [routerLink]="['/signup']" routerLinkActive="router-link-active">Sign up</a>
-      </mat-card-actions>
-    </form>
-  </mat-card>
+            </mat-card-content>
+            <mat-card-actions class="form-element ">
+                <button mat-raised-button color="primary" type="submit">Sign in</button>
+                <a class="sigup" [routerLink]="['/signup']" routerLinkActive="router-link-active">Sign up</a>
+            </mat-card-actions>
+        </form>
+    </mat-card>
 </div>
