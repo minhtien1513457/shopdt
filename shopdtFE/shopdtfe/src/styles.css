@@ -210,3 +210,7 @@ button.active:focus {
     outline: none !important;
     outline-style: none !important;
 }
+
+mat-form-field {
+    width: 100%;
+}

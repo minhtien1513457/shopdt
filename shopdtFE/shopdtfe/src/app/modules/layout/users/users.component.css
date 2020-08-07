@@ -16,3 +16,8 @@ table {
     color: #f607e2;
     margin-left: 0.5%
 }
+
+.user-detail {
+    cursor: pointer;
+    color: blue;
+}

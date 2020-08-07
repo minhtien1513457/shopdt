@@ -2,10 +2,10 @@
     USERS
 </div>
 <div>
-    <button class="btn-create" mat-raised-button (click)="openCreateModal()"> <mat-icon>add</mat-icon>Create</button>
+    <button class="btn-create" mat-raised-button (click)="openCreateModal()">Create<mat-icon>add</mat-icon></button>
     <button class="btn-action" mat-raised-button [matMenuTriggerFor]="menu">Action<mat-icon>arrow_drop_down</mat-icon></button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item><mat-icon style="color: rgb(218, 221, 12)">colorize</mat-icon>EDIT</button>
+        <button mat-menu-item><mat-icon style="color: rgb(244, 248, 0)">colorize</mat-icon>EDIT</button>
         <button mat-menu-item><mat-icon style="color: red">delete_outline</mat-icon>DELETE</button>
     </mat-menu>
 </div>
@@ -26,7 +26,7 @@
         <!-- username Column -->
         <ng-container matColumnDef="username">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> User name </th>
-            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+            <td mat-cell *matCellDef="let element" (click)="openDetailModal(element)" class="user-detail"> {{element.username}} </td>
         </ng-container>
 
         <!-- email Column -->

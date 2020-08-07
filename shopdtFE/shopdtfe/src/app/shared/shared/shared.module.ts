@@ -43,15 +43,20 @@ import { HeaderSidebarComponent } from 'src/app/components/header-sidebar/header
 import { RouterModule } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CreateUserModalComponent } from 'src/app/modules/modal/create-user-modal/create-user-modal.component';
+import { DetailUserModalComponent } from 'src/app/modules/modal/detail-user-modal/detail-user-modal.component';
 
 @NgModule({
    declarations: [
       HeaderSidebarComponent,
       HeaderComponent,
       FooterComponent,
-      CreateUserModalComponent
+      CreateUserModalComponent,
+      DetailUserModalComponent
    ],
-   entryComponents: [CreateUserModalComponent],
+   entryComponents: [
+      CreateUserModalComponent, 
+      DetailUserModalComponent
+   ],
 
   imports: [
    MatFormFieldModule,

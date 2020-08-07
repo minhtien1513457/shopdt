@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ApiUserService } from 'src/app/shared/services/api-user.service';
-import { MatPaginator, MatTableDataSource, PageEvent, MatSort, MatButtonModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatTableDataSource, PageEvent, MatSort, MatButtonModule, MatDialog, MatSnackBar } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CreateUserModalComponent } from '../../modal/create-user-modal/create-user-modal.component';
+import { DetailUserModalComponent } from '../../modal/detail-user-modal/detail-user-modal.component';
 
 @Component({
   selector: 'app-users',
@@ -34,7 +35,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   constructor(
     private userApi: ApiUserService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -146,12 +148,20 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   openCreateModal(): void {
     const dialogRef = this.dialog.open(CreateUserModalComponent, {
-      data: {name: this.name, animal: this.animal}
+      width: '40%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+    });
+  }
+
+  openDetailModal(e): void {
+    const dialogRef = this.dialog.open(DetailUserModalComponent, {
+      width: '40%',
+      data: { id: e.id },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
 }

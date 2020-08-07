@@ -58,4 +58,15 @@ export class ApiUserService {
       })
     )
   }
+
+  /** Create user */
+  public createUser(data): Observable<any> {
+    const url = `auth/signup`;
+    return this.api.post(url, data).pipe(
+      map(data => {
+        return data;
+      }
+      )
+    );
+  }
 }

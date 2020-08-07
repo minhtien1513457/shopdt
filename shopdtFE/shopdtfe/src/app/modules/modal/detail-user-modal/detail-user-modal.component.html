@@ -1,0 +1,65 @@
+<h1 mat-dialog-title class="title">Info</h1>
+<div>
+    <mat-list-item>
+        <mat-grid-list cols="2" rowHeight="50px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                Username
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                {{dataUser.username}}
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-divider></mat-divider>
+
+        <mat-grid-list cols="2" rowHeight="50px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                Email
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                {{dataUser.email}}
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-divider></mat-divider>
+
+        <mat-grid-list cols="2" rowHeight="50px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                Role
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                {{dataUser.role.name}}
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-divider></mat-divider>
+
+        <mat-grid-list cols="2" rowHeight="50px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                Created By
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                {{dataUser.createdUser}}
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-divider></mat-divider>
+
+        <mat-grid-list cols="2" rowHeight="50px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                Created Time
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                {{dataUser.createdDate}}
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-divider></mat-divider>
+
+        <mat-grid-list cols="2" rowHeight="50px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                Updated Time
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                {{dataUser.updatedDate}}
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-divider></mat-divider>
+    </mat-list-item>
+
+</div>
