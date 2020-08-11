@@ -25,37 +25,37 @@ import org.springframework.web.bind.annotation.RestController;
 import com.siuao.shopdt.log.entity.RootEntity;
 import com.siuao.shopdt.paging.Paging;
 import com.siuao.shopdt.request.RequestInfo;
-import com.siuao.shopdt.request.UpdateUserRequest;
+import com.siuao.shopdt.request.UpdateOsRequest;
 import com.siuao.shopdt.response.ResponseResult;
 import com.siuao.shopdt.service.ErrorMessageService;
 import com.siuao.shopdt.service.LocalizedService;
-import com.siuao.shopdt.service.UserService;
+import com.siuao.shopdt.service.OsService;
 import com.siuao.shopdt.utils.LogUtil;
 import com.siuao.shopdt.utils.ThreadLocalHelper;
-import com.siuao.shopdt.vo.UserVO;
+import com.siuao.shopdt.vo.OsVO;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/user")
-public class UserController {
+@RequestMapping("/api/os")
+public class OsController {
     @Autowired
-    protected UserService userService;
+    protected OsService osService;
 
     @Autowired
     protected ErrorMessageService errorMessageService;
 
     @Autowired
     protected LocalizedService localizedService;
-
+    
     @GetMapping(value = "")
-    public ResponseEntity<ResponseResult<UserVO>> getUserId(@Context HttpServletRequest request,
+    public ResponseEntity<ResponseResult<OsVO>> getOsId(@Context HttpServletRequest request,
                                                            @RequestParam(value = "id", required = false) Long id) throws Exception {
-        ResponseResult<UserVO> response = new ResponseResult<UserVO>();
+        ResponseResult<OsVO> response = new ResponseResult<OsVO>();
         RequestInfo reqInfo = ThreadLocalHelper.getRequestinfo();
         RootEntity log = RootEntity.create();
         try {
-            log.reqUri(request.getRequestURI()).type("UserController.getUserId").reqUser(reqInfo.getUsername());
-            response.setData(userService.getUserById(id));
+            log.reqUri(request.getRequestURI()).type("OsController.getUserId").reqUser(reqInfo.getUsername());
+            response.setData(osService.getOsById(id));
             response.setSuccess(true);
             log.success();
         } catch (Exception e) {
@@ -68,12 +68,11 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-
     @GetMapping(value = "/list")
-    public ResponseEntity<Paging<UserVO>> getAllUser(@Context HttpServletRequest request,
+    public ResponseEntity<Paging<OsVO>> getAllOs(@Context HttpServletRequest request,
                                                    @RequestParam(value = "page", required = false) Integer page,
                                                    @RequestParam(value = "size", required = false) Integer size) throws Exception {
-        Paging<UserVO> response = new Paging<UserVO>();
+        Paging<OsVO> response = new Paging<OsVO>();
         RequestInfo reqInfo = ThreadLocalHelper.getRequestinfo();
         RootEntity log = RootEntity.create();
         if ((page != null && page <= 0) || (size != null && size < 0)) {//page start from 1
@@ -81,8 +80,8 @@ public class UserController {
             return ResponseEntity.ok(response);
         }
         try {
-            log.reqUri(request.getRequestURI()).type("UserController.getAllUser").reqUser(reqInfo.getUsername());
-            response = userService.getAllUser( page, size);
+            log.reqUri(request.getRequestURI()).type("OsController.getAllUser").reqUser(reqInfo.getUsername());
+            response = osService.getAllOS( page, size);
             response.setSuccess(true);
             log.success();
         } catch (Exception e) {
@@ -95,20 +94,20 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{uid}")
-    public ResponseEntity editUser(@Context HttpServletRequest request, @PathVariable(name = "uid") String uid, @RequestBody UpdateUserRequest req) {
+    @PutMapping("/{osid}")
+    public ResponseEntity editUser(@Context HttpServletRequest request, @PathVariable(name = "osid") String osid, @RequestBody UpdateOsRequest req) {
         RootEntity log = RootEntity.create();
         RequestInfo reqInfo = ThreadLocalHelper.getRequestinfo();
 
-        log.reqUri(request.getRequestURI()).type("UserController.editUser").reqUser(reqInfo.getUsername());
-        if (StringUtils.isEmpty(uid)) {
+        log.reqUri(request.getRequestURI()).type("OsController.editUser").reqUser(reqInfo.getUsername());
+        if (StringUtils.isEmpty(osid)) {
             log.fail();
-            return ResponseEntity.badRequest().body("User id is empty");
+            return ResponseEntity.badRequest().body("Os id is empty");
         }
-        log.reqProp("UserId", uid);
-        req.setId(Long.valueOf(uid));
+        log.reqProp("OsId", osid);
+        req.setId(Long.valueOf(osid));
         try {
-            boolean success = userService.updateUser(reqInfo.getUsername(), req);
+            boolean success = osService.updateOs(reqInfo.getUsername(), req);
             if (success) {
                 log.success();
                 return ResponseEntity.ok().build();
@@ -124,23 +123,23 @@ public class UserController {
             LogUtil.jsonLog.info(append("metric", log), log.toString());
         }
     }
-
-    @DeleteMapping("/{uid}")
-    public ResponseEntity deleteUsers(@Context HttpServletRequest request, @PathVariable(name = "uid") String uid) {
+    
+    @DeleteMapping("/{osid}")
+    public ResponseEntity deleteUsers(@Context HttpServletRequest request, @PathVariable(name = "osid") String osid) {
         RootEntity log = RootEntity.create();
         RequestInfo reqInfo = ThreadLocalHelper.getRequestinfo();
 
-        log.reqUri(request.getRequestURI()).type("UserController.deleteUser").reqUser(reqInfo.getUsername());
+        log.reqUri(request.getRequestURI()).type("OsController.deleteUser").reqUser(reqInfo.getUsername());
 
-        if (StringUtils.isEmpty(uid)) {
+        if (StringUtils.isEmpty(osid)) {
             log.fail();
             return ResponseEntity.badRequest().body("User id is empty");
         }else {
-        	List<String> userIds = Arrays.asList(uid.split(",", -1));
-        	 log.reqProp("UserId", uid);
+        	List<String> userIds = Arrays.asList(osid.split(",", -1));
+        	 log.reqProp("OsId", osid);
              try {
             	 userIds.forEach(u -> {
-            		 userService.deleteUser(reqInfo.getUsername(), Long.valueOf(u).longValue());
+            		 osService.deleteOs(reqInfo.getUsername(), Long.valueOf(u).longValue());
             	 });
                  log.success();
                  return ResponseEntity.ok().build();
@@ -155,5 +154,3 @@ public class UserController {
        
     }
 }
-
-

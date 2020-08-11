@@ -5,8 +5,8 @@
     <button class="btn-create" mat-raised-button (click)="openCreateModal()">Create<mat-icon>add</mat-icon></button>
     <button class="btn-action" mat-raised-button [matMenuTriggerFor]="menu">Action<mat-icon>arrow_drop_down</mat-icon></button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item><mat-icon style="color: rgb(244, 248, 0)">colorize</mat-icon>EDIT</button>
-        <button mat-menu-item><mat-icon style="color: red">delete_outline</mat-icon>DELETE</button>
+        <button mat-menu-item (click)="openEditModal()"><mat-icon style="color: rgb(244, 248, 0)">colorize</mat-icon>EDIT</button>
+        <button mat-menu-item (click)="onDelete()"><mat-icon style="color: red">delete_outline</mat-icon>DELETE</button>
     </mat-menu>
 </div>
 <div class="mat-elevation-z8" style="margin-top: 0.5%">

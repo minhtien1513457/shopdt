@@ -25,12 +25,12 @@ public interface UserService {
      * @param userId
      * @return
      */
-    boolean deleteUser(Long userActionId, Long userId);
+    boolean deleteUser(String userActionName, Long userId);
 
     /**
      *
      * @param req
      * @return
      */
-    Boolean updateUser(UpdateUserRequest req) throws Exception;
+    Boolean updateUser(String userActionName, UpdateUserRequest req) throws Exception;
     }

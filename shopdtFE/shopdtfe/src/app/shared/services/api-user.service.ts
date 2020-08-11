@@ -69,4 +69,26 @@ export class ApiUserService {
       )
     );
   }
+
+  /** Edit user */
+  public editUser(id, data): Observable<any> {
+    const url = `user/${id}`;
+    return this.api.put(url, data).pipe(
+      map(data => {
+        return data;
+      }
+      )
+    );
+  }
+
+    /** Edit user */
+    public deleteUser(ids): Observable<any> {
+      const url = `user/${ids}`;
+      return this.api.delete({path: url}).pipe(
+        map(data => {
+          return data;
+        }
+        )
+      );
+    }
 }

@@ -24,7 +24,8 @@ export class ApiService {
   private setHeaders(): HttpHeaders {
     let header = new HttpHeaders(
       {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        observe: 'response',
       }
     );
 
@@ -109,11 +110,20 @@ export class ApiService {
     return this.httpClient.put(
       `${this.urlServer}${path}`,
       JSON.stringify(body),
-      { headers: this.setHeaders() }
+      { headers: this.setHeaders(), },
     )
       .pipe(
         timeout(this.timeOut),
-        map((res: Response) => res),
+        map((res: Response) => {
+          if (res) {
+            if (res.status === 201) {
+                return [{ status: res.status, json: res }]
+            }
+            else if (res.status === 200) {
+                return [{ status: res.status, json: res }]
+            }
+          }
+        }),
         catchError(err => this.formatErrors(err))
       );
   }
@@ -138,10 +148,12 @@ export class ApiService {
       {
         headers: this.setHeaders(),
         params: params
-      }
+      },
     ).pipe(
       timeout(this.timeOut),
-      map((res: Response) => res),
+      map((res: Response) => {
+        res
+      }),
       catchError(err => this.formatErrors(err))
     );
   }

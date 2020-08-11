@@ -44,6 +44,7 @@ import { RouterModule } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CreateUserModalComponent } from 'src/app/modules/modal/create-user-modal/create-user-modal.component';
 import { DetailUserModalComponent } from 'src/app/modules/modal/detail-user-modal/detail-user-modal.component';
+import { EditUserModalComponent } from 'src/app/modules/modal/edit-user-modal/edit-user-modal.component';
 
 @NgModule({
    declarations: [
@@ -51,11 +52,13 @@ import { DetailUserModalComponent } from 'src/app/modules/modal/detail-user-moda
       HeaderComponent,
       FooterComponent,
       CreateUserModalComponent,
-      DetailUserModalComponent
+      DetailUserModalComponent,
+      EditUserModalComponent
    ],
    entryComponents: [
       CreateUserModalComponent, 
-      DetailUserModalComponent
+      DetailUserModalComponent,
+      EditUserModalComponent
    ],
 
   imports: [

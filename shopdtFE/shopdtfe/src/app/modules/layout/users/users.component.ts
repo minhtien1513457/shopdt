@@ -4,6 +4,7 @@ import { MatPaginator, MatTableDataSource, PageEvent, MatSort, MatButtonModule, 
 import { SelectionModel } from '@angular/cdk/collections';
 import { CreateUserModalComponent } from '../../modal/create-user-modal/create-user-modal.component';
 import { DetailUserModalComponent } from '../../modal/detail-user-modal/detail-user-modal.component';
+import { EditUserModalComponent } from '../../modal/edit-user-modal/edit-user-modal.component';
 
 @Component({
   selector: 'app-users',
@@ -40,6 +41,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    this.selectedElement = [];
     this.userApi.getListUser(1, this.pagesizeInit).subscribe(res => {
       this.listUser = res.lstData;
       this.pageIndex = 0;
@@ -130,6 +132,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   public getServerData(e?: PageEvent) {
+    this.selectedElement = [];
+    this.selection.clear();
     this.userApi.getListUser(e.pageIndex + 1, e.pageSize).subscribe(res => {
       this.listUser = res.lstData;
       this.pageIndex = res.pageNo - 1;
@@ -163,5 +167,68 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  openSnackBar(action, status) {
+    this._snackBar.open(action, status, {
+      duration: 3000,
+      horizontalPosition: "center",
+      verticalPosition: "top",
+    });
+  }
+
+  openEditModal(): void {
+    if(this.selectedElement.length != 1) {
+      this.openSnackBar("Edit User", "Please choose one user")
+    }
+    const dialogRef = this.dialog.open(EditUserModalComponent, {
+      width: '40%',
+      data: { id: this.selectedElement[0].id },
+    });
+
+    const sub = dialogRef.componentInstance.onEdit.subscribe(() => {
+      this.onReload();
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      sub.unsubscribe();
+    });
+  }
+
+  onDelete(): void {
+    let tmp = "";
+    for(let i=0; i< this.selectedElement.length; i++) {
+      if(i == this.selectedElement.length -1) {
+        tmp = tmp + this.selectedElement[i].id;
+      }else {
+        tmp = tmp + this.selectedElement[i].id + ",";
+      }
+    }
+    this.userApi.deleteUser(tmp).subscribe(res => {
+      if (!res) {
+        this.openSnackBar("Delete User", "Success");
+        this.onReload();
+      } else {
+        this.openSnackBar("Edit User", "Fail: " + res)
+      }
+  });
+  }
+
+  onReload(): void {
+    this.selectedElement = [];
+    this.selection.clear();
+    this.userApi.getListUser(this.pageIndex + 1, this.pageSize).subscribe(res => {
+      this.listUser = res.lstData;
+      this.pageIndex = res.pageNo - 1;
+      this.pageSize = res.pageSize;
+      this.length = res.total;
+      this.totalPage = res.totalPage;
+      this.dataSource = new MatTableDataSource<any>(this.listUser);
+      this.dataSource.sort = this.sort;
+    },
+      error => {
+        // handle error
+      }
+    );
   }
 }
