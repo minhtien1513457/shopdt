@@ -14,6 +14,7 @@ const routes: Routes = [
       {path: 'laptop', loadChildren: './laptop/laptop.module#LaptopModule'},
       {path: 'tablet', loadChildren: './tablet/tablet.module#TabletModule'},
       {path: 'user', loadChildren: './users/users.module#UsersModule'},
+      {path: 'type', loadChildren: './type/type.module#TypeModule'},
     ]
   }
 ];

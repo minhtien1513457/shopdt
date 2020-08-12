@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OsVO {
+public class TypeVO {
     private Long id;
     private String name;
     private String description;
@@ -22,4 +22,5 @@ public class OsVO {
     private String updatedUser;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
+    
 }

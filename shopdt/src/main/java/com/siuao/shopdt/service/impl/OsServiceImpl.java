@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.siuao.shopdt.constant.ERole;
@@ -21,6 +22,7 @@ import com.siuao.shopdt.request.UpdateOsRequest;
 import com.siuao.shopdt.service.OsService;
 import com.siuao.shopdt.vo.OsVO;
 
+@Service
 public class OsServiceImpl implements OsService{
 	@Autowired
 	private IOsDao osDao;

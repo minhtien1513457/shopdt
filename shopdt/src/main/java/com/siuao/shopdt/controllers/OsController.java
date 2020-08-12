@@ -54,7 +54,7 @@ public class OsController {
         RequestInfo reqInfo = ThreadLocalHelper.getRequestinfo();
         RootEntity log = RootEntity.create();
         try {
-            log.reqUri(request.getRequestURI()).type("OsController.getUserId").reqUser(reqInfo.getUsername());
+            log.reqUri(request.getRequestURI()).type("OsController.getOsId").reqUser(reqInfo.getUsername());
             response.setData(osService.getOsById(id));
             response.setSuccess(true);
             log.success();
@@ -80,7 +80,7 @@ public class OsController {
             return ResponseEntity.ok(response);
         }
         try {
-            log.reqUri(request.getRequestURI()).type("OsController.getAllUser").reqUser(reqInfo.getUsername());
+            log.reqUri(request.getRequestURI()).type("OsController.getAllOs").reqUser(reqInfo.getUsername());
             response = osService.getAllOS( page, size);
             response.setSuccess(true);
             log.success();
@@ -95,11 +95,11 @@ public class OsController {
     }
 
     @PutMapping("/{osid}")
-    public ResponseEntity editUser(@Context HttpServletRequest request, @PathVariable(name = "osid") String osid, @RequestBody UpdateOsRequest req) {
+    public ResponseEntity editOs(@Context HttpServletRequest request, @PathVariable(name = "osid") String osid, @RequestBody UpdateOsRequest req) {
         RootEntity log = RootEntity.create();
         RequestInfo reqInfo = ThreadLocalHelper.getRequestinfo();
 
-        log.reqUri(request.getRequestURI()).type("OsController.editUser").reqUser(reqInfo.getUsername());
+        log.reqUri(request.getRequestURI()).type("OsController.editOs").reqUser(reqInfo.getUsername());
         if (StringUtils.isEmpty(osid)) {
             log.fail();
             return ResponseEntity.badRequest().body("Os id is empty");
@@ -125,15 +125,15 @@ public class OsController {
     }
     
     @DeleteMapping("/{osid}")
-    public ResponseEntity deleteUsers(@Context HttpServletRequest request, @PathVariable(name = "osid") String osid) {
+    public ResponseEntity deleteOSs(@Context HttpServletRequest request, @PathVariable(name = "osid") String osid) {
         RootEntity log = RootEntity.create();
         RequestInfo reqInfo = ThreadLocalHelper.getRequestinfo();
 
-        log.reqUri(request.getRequestURI()).type("OsController.deleteUser").reqUser(reqInfo.getUsername());
+        log.reqUri(request.getRequestURI()).type("OsController.deleteOSs").reqUser(reqInfo.getUsername());
 
         if (StringUtils.isEmpty(osid)) {
             log.fail();
-            return ResponseEntity.badRequest().body("User id is empty");
+            return ResponseEntity.badRequest().body("Os id is empty");
         }else {
         	List<String> userIds = Arrays.asList(osid.split(",", -1));
         	 log.reqProp("OsId", osid);
