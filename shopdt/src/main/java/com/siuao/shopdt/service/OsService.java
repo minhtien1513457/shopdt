@@ -1,9 +1,10 @@
 package com.siuao.shopdt.service;
 
 import com.siuao.shopdt.paging.Paging;
+import com.siuao.shopdt.request.CreateOsRequest;
 import com.siuao.shopdt.request.UpdateOsRequest;
 import com.siuao.shopdt.vo.OsVO;
-import com.siuao.shopdt.vo.UserVO;
+import com.siuao.shopdt.vo.TypeVO;
 
 public interface OsService {
 	/**
@@ -34,4 +35,13 @@ public interface OsService {
 	 * @return
 	 */
 	Boolean updateOs(String userActionName, UpdateOsRequest req) throws Exception;
+	
+	/**
+	 * 
+	 * @param userActionName
+	 * @param req
+	 * @return
+	 * @throws Exception
+	 */
+	OsVO createOs(String userActionName, CreateOsRequest req) throws Exception;
 }

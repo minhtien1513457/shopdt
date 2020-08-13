@@ -10,14 +10,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.siuao.shopdt.constant.ERole;
 import com.siuao.shopdt.dao.IOsDao;
 import com.siuao.shopdt.dao.IUserDao;
 import com.siuao.shopdt.entity.OsEntity;
+import com.siuao.shopdt.entity.TypeEntity;
 import com.siuao.shopdt.entity.User;
 import com.siuao.shopdt.paging.Paging;
+import com.siuao.shopdt.request.CreateOsRequest;
 import com.siuao.shopdt.request.UpdateOsRequest;
 import com.siuao.shopdt.service.OsService;
 import com.siuao.shopdt.vo.OsVO;
@@ -111,6 +114,22 @@ public class OsServiceImpl implements OsService{
 			}
 		} else
 			return false;
+	}
+
+	@Override
+    @Transactional(rollbackFor={Exception.class})
+	public OsVO createOs(String userActionName, CreateOsRequest req) throws Exception {
+		OsVO res = null;
+		User userAction = userDao.findByUsername(userActionName).orElse(null);
+		if (userAction != null && userAction.getRole().getName().equals(ERole.ROLE_ADMIN)) {
+			OsEntity os = new OsEntity();
+			os.setName(req.getName());
+			os.setDescription(req.getDescription());
+			os.setCreatedUser(userActionName);
+			osDao.save(os);
+			res = this.populateOs(os);
+		}
+		return res;
 	}
 
 }
